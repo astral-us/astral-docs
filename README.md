@@ -8,6 +8,8 @@ platform. Rendered at [astral.us/docs](https://astral.us/docs) via
 
 - `introduction.mdx` — what Astral is and what's open vs proprietary.
 - `quickstart.mdx` — first-flight guide for hardware customers.
+- `simulation.mdx` — run the SDK against ArduPilot SITL (no hardware).
+- `isaac-sim.mdx` — full perception-in-the-loop sim: Isaac + Nav2 + SDK.
 - `mint.json` — Mintlify navigation and theme.
 
 ## Local preview

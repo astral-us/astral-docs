@@ -44,6 +44,13 @@
         "introduction",
         "quickstart"
       ]
+    },
+    {
+      "group": "Simulation",
+      "pages": [
+        "simulation",
+        "isaac-sim"
+      ]
     }
   ],
   "footerSocials": {

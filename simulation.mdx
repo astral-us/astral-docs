@@ -1,0 +1,69 @@
+---
+title: "Run in simulation (SITL)"
+description: "Try the Astral SDK against a simulated copter — no drone, no GPU."
+---
+
+You can run every command in the [`astral-sdk`](https://github.com/astral-us/astral-sdk)
+against ArduPilot SITL (Software-In-The-Loop). This is the fastest way to
+try the API without hardware, and it's also a good safety net before
+flying new code on a real aircraft.
+
+## What you'll need
+
+- Python 3.10+
+- ArduPilot SITL — the canonical setup is documented at
+  [ardupilot.org/dev](https://ardupilot.org/dev/docs/sitl-with-gazebo.html).
+  At minimum you need `sim_vehicle.py` from the ArduPilot tree.
+
+No GPU, no Astral hardware.
+
+## 1. Start the simulator
+
+In one terminal:
+
+```bash
+sim_vehicle.py -v ArduCopter --console --map
+```
+
+SITL exposes a MAVLink TCP listener on `127.0.0.1:5760` by default.
+
+## 2. Point the SDK at SITL
+
+In another terminal:
+
+```bash
+pip install astral-sdk
+export ASTRAL_SDK_SERIAL_PORT=tcp:127.0.0.1:5760
+```
+
+Any URL starting with `tcp:`, `udp:`, or `udpin:` is treated as a network
+endpoint — the SDK skips the serial-device check and hands the URL
+directly to `pymavlink`.
+
+## 3. Fly
+
+```python
+import time
+import astral_sdk as drone
+
+drone.takeoff(2.0)        # 2 m AGL
+time.sleep(5)
+drone.land()
+drone.disconnect()
+```
+
+The exact same script flies real hardware — you only change the env var.
+
+A runnable version is in
+[`astral-sdk/examples/sitl/`](https://github.com/astral-us/astral-sdk/tree/main/examples/sitl).
+
+## What this covers (and what it doesn't)
+
+SITL gives you:
+
+- A full ArduPilot stack: arm/disarm, modes, takeoff/land, position and
+  velocity control, telemetry — all behave like the real thing.
+- A safe place to iterate on flight logic before touching real props.
+
+SITL does **not** give you cameras, perception, or a 3D world. For that,
+see [Run in Isaac Sim](/isaac-sim).
