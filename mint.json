@@ -1,0 +1,54 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Astral Documentation",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#06b6d4",
+    "light": "#06b6d4",
+    "dark": "#0a0f1a",
+    "anchors": {
+      "from": "#06b6d4",
+      "to": "#3b82f6"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "Email",
+      "url": "mailto:hello@astral.us"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "astral.us",
+    "url": "https://astral.us"
+  },
+  "anchors": [
+    {
+      "name": "SDK on GitHub",
+      "icon": "github",
+      "url": "https://github.com/astral-us/astral-sdk"
+    },
+    {
+      "name": "YouTube",
+      "icon": "youtube",
+      "url": "https://www.youtube.com/@astral_us"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": [
+        "introduction",
+        "quickstart"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/astral-us",
+    "linkedin": "https://www.linkedin.com/company/astral-us",
+    "youtube": "https://www.youtube.com/@astral_us"
+  }
+}
