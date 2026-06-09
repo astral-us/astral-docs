@@ -3,3 +3,8 @@ node_modules/
 .mintlify/
 .DS_Store
 *.log
+
+# Internal/reference docs — not published (site pages are .mdx)
+*.md
+*.csv
+!README.md
