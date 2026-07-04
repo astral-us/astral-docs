@@ -1,0 +1,56 @@
+[
+  {
+    "attack": "GNSS walk-off",
+    "n": 420,
+    "capture_pct": 0.0,
+    "spoof_det_pct": 0.0,
+    "pos_error_m": 5.14,
+    "min_miss_m": null,
+    "evasion_pct": 0.0
+  },
+  {
+    "attack": "RF jam",
+    "n": 420,
+    "capture_pct": 0.0,
+    "spoof_det_pct": 0.0,
+    "pos_error_m": 0.0,
+    "min_miss_m": null,
+    "evasion_pct": 0.0
+  },
+  {
+    "attack": "Interceptor (PN)",
+    "n": 210,
+    "capture_pct": 79.5,
+    "spoof_det_pct": 0.0,
+    "pos_error_m": 0.0,
+    "min_miss_m": 0.11,
+    "evasion_pct": 0.0
+  },
+  {
+    "attack": "Control takeover",
+    "n": 210,
+    "capture_pct": 0.0,
+    "spoof_det_pct": 0.0,
+    "pos_error_m": 0.0,
+    "min_miss_m": null,
+    "evasion_pct": 0.0
+  },
+  {
+    "attack": "GNSS + RF jam",
+    "n": 210,
+    "capture_pct": 0.0,
+    "spoof_det_pct": 0.0,
+    "pos_error_m": 7.95,
+    "min_miss_m": null,
+    "evasion_pct": 0.0
+  },
+  {
+    "attack": "Interceptor + RF jam",
+    "n": 210,
+    "capture_pct": 79.5,
+    "spoof_det_pct": 0.0,
+    "pos_error_m": 0.0,
+    "min_miss_m": 0.11,
+    "evasion_pct": 0.0
+  }
+]

@@ -1,0 +1,90 @@
+---
+title: "L5 Fleet Autonomy"
+description: "The zero-intervention reactive navigation stack — classical control, no models, and how to run it on your own vehicle."
+---
+
+The L5 stack is the navigation controller behind our zero-intervention fleet results
+(a heterogeneous quadcopter + rover team clearing a 16-scenario adversarial benchmark).
+The first thing to know:
+
+## It uses no AI. No models. No downloads.
+
+The entire L5 decision stack is classical control — pure Python + NumPy, CPU-only,
+microseconds per tick:
+
+| Module | Role |
+| --- | --- |
+| `reactive_goto_controller` | Analytic potential field: goal attraction + inverse-distance obstacle/teammate repulsion. Emits per-class actions (holonomic quad / unicycle rover). |
+| `RuleBasedSmart` | Deterministic fleet advisor: blind-agent slowdown, quad altitude separation, near-goal lock, stall recovery. |
+| `onboard_l5` | Per-vehicle runtime: assembles an observation, runs controller + advisor, emits a velocity setpoint. |
+
+There are learned (`.onnx`) policies elsewhere in the codebase — they are **not** used
+here, and in our testing they underperformed this rule-based controller. L5 needs zero
+weights and runs on hardware as light as a Raspberry Pi (a GPU/Orin is only needed for
+the separate VLM perception stack, not for L5 navigation).
+
+## Reproduce the results (nothing to download)
+
+Run the 16-scenario scorecard — `--sensing ideal` is the original result, `realistic`
+is what a real sensor gives you:
+
+```bash
+python -m eco.drone.sim.scorecard --smart-layer rule --sensing realistic
+```
+
+Software-in-the-loop through the real ArduPilot autopilot (needs a built SITL binary):
+
+```bash
+python -m eco.drone.training.sitl_l5 \
+  --scenario eco/drone/sim/scenarios/pursuit_corridor.yaml --agent quad_0 \
+  --sitl-bin ~/ardupilot/build/sitl/bin/arducopter \
+  --defaults ~/ardupilot/Tools/autotest/default_params/copter.parm
+# rovers: --agent rover_0 --rover-fd  (forward-depth) with ardurover
+```
+
+Parity tests confirm the shipped controller is byte-identical to the validated one:
+
+```bash
+python -m pytest eco/drone/common/tests
+```
+
+## Run it on your own vehicle
+
+`OnboardL5Runtime` takes four injected providers — you implement the ones for **your**
+hardware; the decision logic is untouched:
+
+- **Telemetry** → pose `(pos_enu, yaw, vel, loc_confidence, sensor_ok)`
+- **Sensor** → the class's ray array: a **72-ray 360° lidar ring** (rover) or a
+  **45-ray 5×9 forward depth fan** (quad), in the documented body convention. A
+  forward-depth sensor (e.g. an ARKit depth stream) also works for the rover.
+- **Peers** → teammate states for multi-vehicle coordination (or none for solo)
+- **Actuator** → your flight controller. A MAVLink body-velocity actuator ships; a
+  ROS 2 `/cmd_vel` variant is a few lines.
+
+The controller returns `[vx, vy, vz, yaw_rate]` (quad, body frame) or `[speed, yaw_rate]`
+(rover). Frame conventions and the exact observation fields are documented at the top of
+the `l5_core` module.
+
+## What is and isn't true — read before flying
+
+<Warning>
+The L5 results are validated in **simulation and software-in-the-loop only.** There is
+no real-flight data. "L5" here is a benchmark and SITL result — not a certification, and
+not a guarantee for your environment.
+</Warning>
+
+- **"L5" is scenario-specific.** The benchmark geometry was tuned for our 16 scenarios.
+  Dropped into an arbitrary environment, this is a *competent reactive go-to-goal with
+  obstacle avoidance* — not automatically L5. Known limits: potential-field local minima
+  in dense clutter (no global planner), forward-FOV blindness if depth-only, and
+  sensitivity to sensor noise without adequate clearance margins.
+- **You own safety validation** on your airframe — speed caps, kill switch, and your own
+  flight testing.
+
+## Where the full story is
+
+The end-to-end sim-to-real write-up — the realistic-sensing benchmark, the approaches
+that failed, the distributional results (99.5% collision-free under sensor noise), and
+16/16 collision-free through ArduPilot SITL for both vehicle classes — is on the research
+site: [From L5-in-Sim to the Real Autopilot](https://astral.us/research/l5-sim-to-real),
+with a companion [blog post](https://astral.us/blog/l5-sim-to-real-honest).

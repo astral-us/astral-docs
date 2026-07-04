@@ -1,0 +1,37 @@
+[
+  {
+    "task": "wh_three_targets",
+    "n": 1620,
+    "sr_pct": 100.0
+  },
+  {
+    "task": "wh_two_targets",
+    "n": 1620,
+    "sr_pct": 94.9
+  },
+  {
+    "task": "wh_forklift",
+    "n": 1620,
+    "sr_pct": 90.7
+  },
+  {
+    "task": "wh_shelf_row",
+    "n": 1620,
+    "sr_pct": 59.9
+  },
+  {
+    "task": "wh_exit_sign",
+    "n": 1620,
+    "sr_pct": 43.5
+  },
+  {
+    "task": "wh_far_corner",
+    "n": 1620,
+    "sr_pct": 26.5
+  },
+  {
+    "task": "wh_coverage",
+    "n": 1620,
+    "sr_pct": 0.0
+  }
+]

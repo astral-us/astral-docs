@@ -1,0 +1,68 @@
+[
+  {
+    "attack": "GNSS walk-off",
+    "no_def_sr": 58.8,
+    "no_def_n": 420,
+    "matched_def": "Plausibility",
+    "matched_sr": 58.1,
+    "matched_n": 420,
+    "all_sr": 58.3,
+    "all_n": 420,
+    "recovery_pp": -0.7
+  },
+  {
+    "attack": "RF jam",
+    "no_def_sr": 57.6,
+    "no_def_n": 420,
+    "matched_def": "Jam failsafe",
+    "matched_sr": 57.6,
+    "matched_n": 420,
+    "all_sr": 59.5,
+    "all_n": 420,
+    "recovery_pp": 0.0
+  },
+  {
+    "attack": "Interceptor (PN)",
+    "no_def_sr": 57.6,
+    "no_def_n": 210,
+    "matched_def": "Evasion",
+    "matched_sr": 59.5,
+    "matched_n": 210,
+    "all_sr": 59.5,
+    "all_n": 210,
+    "recovery_pp": 1.9
+  },
+  {
+    "attack": "Control takeover",
+    "no_def_sr": 65.7,
+    "no_def_n": 210,
+    "matched_def": "Goal bounds",
+    "matched_sr": 65.7,
+    "matched_n": 210,
+    "all_sr": 71.4,
+    "all_n": 210,
+    "recovery_pp": 0.0
+  },
+  {
+    "attack": "GNSS + RF jam",
+    "no_def_sr": 59.0,
+    "no_def_n": 210,
+    "matched_def": "Plausibility",
+    "matched_sr": 57.6,
+    "matched_n": 210,
+    "all_sr": 59.5,
+    "all_n": 210,
+    "recovery_pp": -1.4
+  },
+  {
+    "attack": "Interceptor + RF jam",
+    "no_def_sr": 57.6,
+    "no_def_n": 210,
+    "matched_def": "Evasion",
+    "matched_sr": 59.5,
+    "matched_n": 210,
+    "all_sr": 59.5,
+    "all_n": 210,
+    "recovery_pp": 1.9
+  }
+]

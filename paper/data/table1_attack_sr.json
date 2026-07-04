@@ -1,0 +1,51 @@
+[
+  {
+    "attack": "None (baseline)",
+    "n": 210,
+    "sr_pct": 57.6,
+    "ci95_pp": 6.7,
+    "delta_pp": 0.0
+  },
+  {
+    "attack": "GNSS walk-off",
+    "n": 420,
+    "sr_pct": 58.8,
+    "ci95_pp": 4.7,
+    "delta_pp": 1.2
+  },
+  {
+    "attack": "RF jam",
+    "n": 420,
+    "sr_pct": 57.6,
+    "ci95_pp": 4.7,
+    "delta_pp": 0.0
+  },
+  {
+    "attack": "Interceptor (PN)",
+    "n": 210,
+    "sr_pct": 57.6,
+    "ci95_pp": 6.7,
+    "delta_pp": 0.0
+  },
+  {
+    "attack": "Control takeover",
+    "n": 210,
+    "sr_pct": 65.7,
+    "ci95_pp": 6.4,
+    "delta_pp": 8.1
+  },
+  {
+    "attack": "GNSS + RF jam",
+    "n": 210,
+    "sr_pct": 59.0,
+    "ci95_pp": 6.7,
+    "delta_pp": 1.4
+  },
+  {
+    "attack": "Interceptor + RF jam",
+    "n": 210,
+    "sr_pct": 57.6,
+    "ci95_pp": 6.7,
+    "delta_pp": 0.0
+  }
+]

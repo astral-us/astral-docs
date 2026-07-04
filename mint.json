@@ -46,6 +46,12 @@
       ]
     },
     {
+      "group": "Autonomy",
+      "pages": [
+        "l5-autonomy"
+      ]
+    },
+    {
       "group": "Simulation",
       "pages": [
         "simulation",
